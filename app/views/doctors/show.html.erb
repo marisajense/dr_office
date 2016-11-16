@@ -1,0 +1,18 @@
+<h1>Doctor: <%= @doctor.doctor_full_name %> </h1>
+
+<% if @doctor.patients.any? %>
+  <h5>Patients</h5>
+  <ul>
+    <% @doctor.appointments.each do |ap| %>
+      <li>
+        <%= ap.patient.patient_full_name %> - <%= ap.date %> - <%= ap.time %>
+        <%= link_to 'Remove', appointment_path(ap), method: :delete %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <h5>No Patients Found</h5>
+<% end %>
+
+<%= link_to 'All Doctors', doctors_path %> |
+<%= link_to 'Edit', edit_doctor_path(@doctor) %>
