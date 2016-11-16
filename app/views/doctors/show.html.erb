@@ -3,9 +3,9 @@
 <% if @doctor.patients.any? %>
   <h5>Patients</h5>
   <ul>
-    <% @doctor.appointments.each do |ap| %>
+    <% @doctor.appointments.order(:date, :time).each do |ap| %>
       <li>
-        <%= ap.patient.patient_full_name %> - <%= ap.date %> - <%= ap.time %>
+        <%= ap.patient.patient_full_name %> - <%= ap.date.strftime("%m/%d/%Y") %> - <%= ap.time.strftime("%I:%M%p") %>
         <%= link_to 'Remove', appointment_path(ap), method: :delete %>
       </li>
     <% end %>
